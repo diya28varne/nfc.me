@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diya Varne</title>
+  <meta name="description" content="Diya Varne — Instagram, LinkedIn, X, GitHub, AWS Builder Center, and portfolio.">
+  <meta name="theme-color" content="#fff4c8">
+  <meta property="og:title" content="Diya Varne">
+  <meta property="og:description" content="Pick your folder, bestie. A little click takes you into my world.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23fde8f4'/%3E%3Cpath d='M8 12h6a2 2 0 0 1 2 2v1h8a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-10a2 2 0 0 1 2-2z' fill='url(%23g)'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23f7b6e6'/%3E%3Cstop offset='1' stop-color='%23c9a6f2'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #6a2a56;
+      --muted: #a56b90;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+
+    body {
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      padding: max(20px, env(safe-area-inset-top)) 18px max(24px, env(safe-area-inset-bottom));
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.12) 40%, rgba(255, 255, 255, 0.28)),
+        linear-gradient(180deg, #fff6d4 0%, #ffe9a4 50%, #ffe39a 100%);
+      color: var(--ink);
+      font-family: Nunito, "Segoe UI", sans-serif;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0.12) 45%, rgba(255, 255, 255, 0.22));
+    }
+
+    .garden {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .garden svg {
+      position: absolute;
+      shape-rendering: crispEdges;
+      width: 44px;
+      height: auto;
+    }
+
+    .garden .sm { width: 34px; }
+    .garden .lg { width: 54px; }
+
+    main {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 420px);
+    }
+
+    h1 {
+      margin: 0 auto 10px;
+      width: min(100%, 240px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.82);
+      border-radius: 999px;
+      box-shadow: 0 8px 20px rgba(170, 90, 140, 0.12);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    h1 svg { width: 16px; height: 16px; flex: none; }
+
+    .hint {
+      margin: 2px 0 4px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .hint span {
+      display: block;
+      margin-top: 2px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px 12px;
+      padding-top: 16px;
+      align-items: center;
+    }
+
+    a.folder {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: 100%;
+      height: 96px;
+      border-radius: 18px;
+      text-decoration: none;
+      color: #fff;
+      background:
+        linear-gradient(165deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.08) 34%, transparent 48%),
+        linear-gradient(180deg, #f8b7e8 0%, #ee8fd8 42%, #d7a6f3 100%);
+      border: 2px solid rgba(255, 255, 255, 0.78);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        inset 0 -10px 18px rgba(150, 70, 170, 0.16),
+        0 12px 24px rgba(180, 90, 160, 0.22);
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 160ms ease;
+    }
+
+    a.folder::before {
+      content: "";
+      position: absolute;
+      top: -14px;
+      left: 14px;
+      width: 58%;
+      height: 20px;
+      border-radius: 12px 14px 4px 4px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.55), transparent 70%),
+        linear-gradient(180deg, #f9c4ec, #eea4e2);
+      border: 2px solid rgba(255, 255, 255, 0.78);
+      border-bottom: none;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    }
+
+    a.folder::after {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: 16px;
+      width: calc(58% - 4px);
+      height: 6px;
+      background: linear-gradient(180deg, #f6b6e6, #f3a9e0);
+    }
+
+    a.folder span.name {
+      position: relative;
+      z-index: 1;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-shadow: 0 2px 10px rgba(120, 40, 110, 0.28);
+    }
+
+    .spark {
+      position: absolute;
+      z-index: 1;
+      background: #fff;
+      clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+      filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.95));
+      pointer-events: none;
+    }
+
+    .s1 { width: 11px; height: 11px; top: 16px; left: 14px; }
+    .s2 { width: 7px; height: 7px; top: 14px; right: 18px; opacity: 0.9; }
+    .s3 { width: 13px; height: 13px; top: 40px; right: 12px; }
+    .s4 { width: 6px; height: 6px; bottom: 14px; left: 18px; opacity: 0.85; }
+    .s5 { width: 8px; height: 8px; bottom: 12px; right: 28px; }
+    .s6 { width: 5px; height: 5px; top: 48px; left: 36%; opacity: 0.8; }
+
+    a.folder:hover,
+    a.folder:focus-visible {
+      transform: translateY(-3px);
+    }
+
+    a.folder:focus-visible {
+      outline: 3px solid #c45ca6;
+      outline-offset: 4px;
+    }
+
+    .buddy {
+      display: block;
+      width: 120px;
+      height: auto;
+      margin: 16px 0 0 auto;
+      image-rendering: pixelated;
+    }
+
+    a.folder.cat-press,
+    a.folder.cat-press:hover,
+    a.folder.cat-press:focus-visible {
+      transform: translateY(2px) scale(0.98);
+    }
+
+    .neko {
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 30;
+      width: 64px;
+      height: 56px;
+      pointer-events: none;
+      transform: translate(12px, calc(100dvh - 74px));
+    }
+
+    .neko svg {
+      display: block;
+      width: 64px;
+      height: 56px;
+      shape-rendering: crispEdges;
+    }
+
+    .neko .zzz {
+      position: absolute;
+      left: 30px;
+      top: 2px;
+      display: flex;
+      gap: 1px;
+    }
+
+    .neko .zzz i {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 11px;
+      color: #7a3a68;
+      opacity: 0;
+    }
+
+    .neko.asleep .zzz i { animation: zzz 1.8s ease-in-out infinite; }
+    .neko.asleep .zzz i:nth-child(2) { animation-delay: 0.25s; font-size: 13px; }
+    .neko.asleep .zzz i:nth-child(3) { animation-delay: 0.5s; font-size: 15px; }
+
+    @keyframes zzz {
+      0% { opacity: 0; transform: translate(0, 6px); }
+      30% { opacity: 1; }
+      100% { opacity: 0; transform: translate(7px, -14px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      a.folder { transition: none; }
+      .neko .zzz i { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="garden" aria-hidden="true">
+    <svg style="top:6%; left:5%; --p:#c2186a; --m:#e23d84; --c:#ffd54a" viewBox="0 0 20 26"><rect x="8" y="0" width="4" height="4" fill="var(--p)"/><rect x="2" y="2" width="4" height="4" fill="var(--p)"/><rect x="14" y="2" width="4" height="4" fill="var(--p)"/><rect x="0" y="6" width="4" height="4" fill="var(--p)"/><rect x="16" y="6" width="4" height="4" fill="var(--p)"/><rect x="2" y="10" width="4" height="4" fill="var(--p)"/><rect x="14" y="10" width="4" height="4" fill="var(--p)"/><rect x="8" y="12" width="4" height="4" fill="var(--p)"/><rect x="6" y="2" width="2" height="4" fill="var(--m)"/><rect x="12" y="2" width="2" height="4" fill="var(--m)"/><rect x="4" y="6" width="4" height="4" fill="var(--m)"/><rect x="12" y="6" width="4" height="4" fill="var(--m)"/><rect x="6" y="10" width="2" height="4" fill="var(--m)"/><rect x="12" y="10" width="2" height="4" fill="var(--m)"/><rect x="8" y="6" width="4" height="4" fill="var(--c)"/><rect x="9" y="16" width="2" height="8" fill="#1b7a45"/><rect x="4" y="18" width="5" height="2" fill="#2e9a58"/><rect x="11" y="20" width="5" height="2" fill="#2e9a58"/></svg>
+    <svg class="sm" style="top:10%; right:6%; --p:#6a1b9a; --m:#8e24aa; --c:#fff3c4" viewBox="0 0 20 26"><rect x="8" y="0" width="4" height="4" fill="var(--p)"/><rect x="2" y="2" width="4" height="4" fill="var(--p)"/><rect x="14" y="2" width="4" height="4" fill="var(--p)"/><rect x="0" y="6" width="4" height="4" fill="var(--p)"/><rect x="16" y="6" width="4" height="4" fill="var(--p)"/><rect x="2" y="10" width="4" height="4" fill="var(--p)"/><rect x="14" y="10" width="4" height="4" fill="var(--p)"/><rect x="8" y="12" width="4" height="4" fill="var(--p)"/><rect x="6" y="2" width="2" height="4" fill="var(--m)"/><rect x="12" y="2" width="2" height="4" fill="var(--m)"/><rect x="4" y="6" width="4" height="4" fill="var(--m)"/><rect x="12" y="6" width="4" height="4" fill="var(--m)"/><rect x="6" y="10" width="2" height="4" fill="var(--m)"/><rect x="12" y="10" width="2" height="4" fill="var(--m)"/><rect x="8" y="6" width="4" height="4" fill="var(--c)"/><rect x="9" y="16" width="2" height="8" fill="#1b7a45"/><rect x="4" y="18" width="5" height="2" fill="#2e9a58"/><rect x="11" y="20" width="5" height="2" fill="#2e9a58"/></svg>
+    <svg class="sm" style="top:46%; left:1%; --p:#ad1457; --m:#d81b60; --c:#ffd54a" viewBox="0 0 20 26"><rect x="8" y="0" width="4" height="4" fill="var(--p)"/><rect x="2" y="2" width="4" height="4" fill="var(--p)"/><rect x="14" y="2" width="4" height="4" fill="var(--p)"/><rect x="0" y="6" width="4" height="4" fill="var(--p)"/><rect x="16" y="6" width="4" height="4" fill="var(--p)"/><rect x="2" y="10" width="4" height="4" fill="var(--p)"/><rect x="14" y="10" width="4" height="4" fill="var(--p)"/><rect x="8" y="12" width="4" height="4" fill="var(--p)"/><rect x="6" y="2" width="2" height="4" fill="var(--m)"/><rect x="12" y="2" width="2" height="4" fill="var(--m)"/><rect x="4" y="6" width="4" height="4" fill="var(--m)"/><rect x="12" y="6" width="4" height="4" fill="var(--m)"/><rect x="6" y="10" width="2" height="4" fill="var(--m)"/><rect x="12" y="10" width="2" height="4" fill="var(--m)"/><rect x="8" y="6" width="4" height="4" fill="var(--c)"/><rect x="9" y="16" width="2" height="8" fill="#1b7a45"/><rect x="4" y="18" width="5" height="2" fill="#2e9a58"/><rect x="11" y="20" width="5" height="2" fill="#2e9a58"/></svg>
+    <svg class="sm" style="top:62%; right:3%; --p:#4a148c; --m:#7b1fa2; --c:#ffd54a" viewBox="0 0 20 26"><rect x="8" y="0" width="4" height="4" fill="var(--p)"/><rect x="2" y="2" width="4" height="4" fill="var(--p)"/><rect x="14" y="2" width="4" height="4" fill="var(--p)"/><rect x="0" y="6" width="4" height="4" fill="var(--p)"/><rect x="16" y="6" width="4" height="4" fill="var(--p)"/><rect x="2" y="10" width="4" height="4" fill="var(--p)"/><rect x="14" y="10" width="4" height="4" fill="var(--p)"/><rect x="8" y="12" width="4" height="4" fill="var(--p)"/><rect x="6" y="2" width="2" height="4" fill="var(--m)"/><rect x="12" y="2" width="2" height="4" fill="var(--m)"/><rect x="4" y="6" width="4" height="4" fill="var(--m)"/><rect x="12" y="6" width="4" height="4" fill="var(--m)"/><rect x="6" y="10" width="2" height="4" fill="var(--m)"/><rect x="12" y="10" width="2" height="4" fill="var(--m)"/><rect x="8" y="6" width="4" height="4" fill="var(--c)"/><rect x="9" y="16" width="2" height="8" fill="#1b7a45"/><rect x="4" y="18" width="5" height="2" fill="#2e9a58"/><rect x="11" y="20" width="5" height="2" fill="#2e9a58"/></svg>
+    <svg style="bottom:5%; left:8%; --p:#6a1b9a; --m:#8e24aa; --c:#ffd54a" viewBox="0 0 20 26"><rect x="8" y="0" width="4" height="4" fill="var(--p)"/><rect x="2" y="2" width="4" height="4" fill="var(--p)"/><rect x="14" y="2" width="4" height="4" fill="var(--p)"/><rect x="0" y="6" width="4" height="4" fill="var(--p)"/><rect x="16" y="6" width="4" height="4" fill="var(--p)"/><rect x="2" y="10" width="4" height="4" fill="var(--p)"/><rect x="14" y="10" width="4" height="4" fill="var(--p)"/><rect x="8" y="12" width="4" height="4" fill="var(--p)"/><rect x="6" y="2" width="2" height="4" fill="var(--m)"/><rect x="12" y="2" width="2" height="4" fill="var(--m)"/><rect x="4" y="6" width="4" height="4" fill="var(--m)"/><rect x="12" y="6" width="4" height="4" fill="var(--m)"/><rect x="6" y="10" width="2" height="4" fill="var(--m)"/><rect x="12" y="10" width="2" height="4" fill="var(--m)"/><rect x="8" y="6" width="4" height="4" fill="var(--c)"/><rect x="9" y="16" width="2" height="8" fill="#1b7a45"/><rect x="4" y="18" width="5" height="2" fill="#2e9a58"/><rect x="11" y="20" width="5" height="2" fill="#2e9a58"/></svg>
+  </div>
+  <main>
+    <h1>
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#6a2a56" stroke-width="2.2" stroke-linecap="round">
+        <circle cx="11" cy="11" r="6.5"/>
+        <path d="M16 16.5 20 20.5"/>
+      </svg>
+      Diya Varne
+    </h1>
+    <p class="hint">Pick your folder, bestie ♡<span>A little click takes you into my world ✨</span></p>
+
+    <nav aria-label="Social links">
+      <a class="folder" href="https://www.instagram.com/diyarv_28/" aria-label="Instagram, @diyarv_28">
+        <i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i>
+        <i class="spark s4"></i><i class="spark s5"></i><i class="spark s6"></i>
+        <span class="name">Instagram</span>
+      </a>
+      <a class="folder" href="https://x.com/DiyaVarne72033" aria-label="X, @DiyaVarne72033">
+        <i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i>
+        <i class="spark s4"></i><i class="spark s5"></i><i class="spark s6"></i>
+        <span class="name">X</span>
+      </a>
+      <a class="folder" href="https://www.linkedin.com/in/diya-varne-375422351/" aria-label="LinkedIn, diya-varne">
+        <i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i>
+        <i class="spark s4"></i><i class="spark s5"></i><i class="spark s6"></i>
+        <span class="name">LinkedIn</span>
+      </a>
+      <a class="folder" href="https://github.com/diya28varne" aria-label="GitHub, diya28varne">
+        <i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i>
+        <i class="spark s4"></i><i class="spark s5"></i><i class="spark s6"></i>
+        <span class="name">GitHub</span>
+      </a>
+      <a class="folder" href="https://builder.aws.com/community/@diyavarne28" aria-label="AWS Builder Center, @diyavarne28">
+        <i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i>
+        <i class="spark s4"></i><i class="spark s5"></i><i class="spark s6"></i>
+        <span class="name">AWS</span>
+      </a>
+      <a class="folder" href="https://diya-rv-portfolio.vercel.app" aria-label="Portfolio">
+        <i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i>
+        <i class="spark s4"></i><i class="spark s5"></i><i class="spark s6"></i>
+        <span class="name">Portfolio</span>
+      </a>
+    </nav>
+    <img class="buddy" src="cat.png" width="214" height="177" alt="delulu but determined">
+  </main>
+  <div class="neko asleep" aria-hidden="true">
+    <svg viewBox="0 0 32 28"></svg>
+    <span class="zzz"><i>z</i><i>z</i><i>z</i></span>
+  </div>
+  <script>
+    (() => {
+      const COLORS = {
+        o: "#3a2030",
+        w: "#fffdf8",
+        p: "#ff8ab5",
+        e: "#241820",
+        n: "#ff6b93",
+        d: "#c42340",
+        c: "#e23d55",
+        l: "#2f9a55",
+        s: "#ef3d52",
+        g: "#fff3c4",
+        b: "#ffb0c8"
+      };
+      const sit = [
+        "................................",
+        "................................",
+        "................................",
+        "...............oooo....oooo.....",
+        "...............oppo....oppo.....",
+        "...............oppo....oppo.....",
+        "...............owwwoooowwwo.....",
+        "..............owwwwwwwwwwwwo....",
+        "..............owwwwwwwwwwwwo....",
+        "..............owwwwwwwwwwwwo....",
+        "..............owwwwwwwweewwo....",
+        "..............owwwwwwweeewwo....",
+        "....dddddddd..owwwwwwweeewwo....",
+        "..wwdd.oooooooowwwwwb.wwwnno....",
+        ".owwccowwwwwwwowwwwwwwwwwwwo....",
+        ".owwccowwwwwwwowwwwwwwwwwwwo....",
+        ".owwccowwwllwwowwwwwwwwwwwwo....",
+        ".oooccowwsllsw.oooooooooooo.....",
+        "..ccccowwsgsswwwwwwwwo..........",
+        "..ccccowwsssgwwwwwwwwo..........",
+        "..ccccowwwwwwwwwwwwwwo..........",
+        ".......oowooooooowooo...........",
+        "........owo.....owo.............",
+        "........owo.....owo.............",
+        "........owo.....owo.............",
+        ".......oooo....oooo.............",
+        ".......oooo....oooo.............",
+        "................................"
+      ];
+      const walka = [
+        "................................",
+        "................................",
+        "................................",
+        "...............oooo....oooo.....",
+        "...............oppo....oppo.....",
+        "...............oppo....oppo.....",
+        "...............owwwoooowwwo.....",
+        "..............owwwwwwwwwwwwo....",
+        "..............owwwwwwwwwwwwo....",
+        "..............owwwwwwwwwwwwo....",
+        "..............owwwwwwwweewwo....",
+        "..............owwwwwwweeewwo....",
+        "....dddddddd..owwwwwwweeewwo....",
+        "..wwdd.oooooooowwwwwb.wwwnno....",
+        ".owwccowwwwwwwowwwwwwwwwwwwo....",
+        ".owwccowwwwwwwowwwwwwwwwwwwo....",
+        ".owwccowwwllwwowwwwwwwwwwwwo....",
+        ".oooccowwsllsw.oooooooooooo.....",
+        "..ccccowwsgsswwwwwwwwo..........",
+        "..ccccowwsssgwwwwwwwwo..........",
+        "..ccccowwwwwwwwwwwwwwo..........",
+        ".......owoooooooooooo...........",
+        ".......owo........owo...........",
+        ".......owo........owo...........",
+        "......oooo........owo...........",
+        "......oooo.......oooo...........",
+        ".................oooo...........",
+        "................................"
+      ];
+      const walkb = [
+        "................................",
+        "................................",
+        "................................",
+        "...............oooo....oooo.....",
+        "...............oppo....oppo.....",
+        "...............oppo....oppo.....",
+        "...............owwwoooowwwo.....",
+        "..............owwwwwwwwwwwwo....",
+        "..............owwwwwwwwwwwwo....",
+        "..............owwwwwwwwwwwwo....",
+        "..............owwwwwwwweewwo....",
+        "..............owwwwwwweeewwo....",
+        "....dddddddd..owwwwwwweeewwo....",
+        "..wwdd.oooooooowwwwwb.wwwnno....",
+        ".owwccowwwwwwwowwwwwwwwwwwwo....",
+        ".owwccowwwwwwwowwwwwwwwwwwwo....",
+        ".owwccowwwllwwowwwwwwwwwwwwo....",
+        ".oooccowwsllsw.oooooooooooo.....",
+        "..ccccowwsgsswwwwwwwwo..........",
+        "..ccccowwsssgwwwwwwwwo..........",
+        "..ccccowwwwwwwwwwwwwwo..........",
+        ".......oooowooowooooo...........",
+        "..........owo.owo...............",
+        "..........owo.owo...............",
+        "..........owooooo...............",
+        ".........oooooooo...............",
+        ".........oooo...................",
+        "................................"
+      ];
+      const tap = [
+        "................................",
+        "................................",
+        "................................",
+        "...............oooo....oooo.....",
+        "...............oppo....oppo.....",
+        "...............oppo....oppo.....",
+        "...............owwwoooowwwo.....",
+        "..............owwwwwwwwwwwwo....",
+        "..............owwwwwwwwwwwwo....",
+        "..............owwwwwwwwwwwwo....",
+        "..............owwwwwwwweewwo....",
+        "..............owwwwwwweeewwo....",
+        "....dddddddd..owwwwwwweeewwo....",
+        "..wwdd.oooooooowwwwwb.wwwnno....",
+        ".owwccowwwwwwwowwwwwwwwwwwwo....",
+        ".owwccowwwwwwwowwwwwwwwwwwwo....",
+        ".owwccowwwllwwowwwwwwwwwwwwo....",
+        ".oooccowwsllsw.oooooooooooo.....",
+        "..ccccowwsgsswwwwwwwwo..owwwwo..",
+        "..ccccowwsssgwwwwwwwwo..oooooo..",
+        "..ccccowwwwwwwwwwwwwwo......oo..",
+        ".......oowooooooowooo...........",
+        "........owo.....owo.............",
+        "........owo.....owo.............",
+        "........owo.....owo.............",
+        ".......oooo....oooo.............",
+        ".......oooo....oooo.............",
+        "................................"
+      ];
+      const sleep = [
+        "................................",
+        "................................",
+        "................................",
+        "................................",
+        "................................",
+        "................................",
+        "................................",
+        "................................",
+        "................................",
+        "................................",
+        "..................oooo..........",
+        "..................oppo..ooo.....",
+        "..................oppo..opo.....",
+        ".................oooooooopo.....",
+        "................owwwwwwwwwwo....",
+        "................owwwwwwwwwwo....",
+        "................owwwwwwwwwwo....",
+        ".....oooooooooooowwwwwwee.wo....",
+        "....owwwwwwwwwwwowwwwwwwwwwo....",
+        "..ooddddddwwwllwowwwwwwwwwnn....",
+        "..owdccccdwwssswowwwwwwwwwwo....",
+        "..owoccccdwwssswowwwwwwwwwwo....",
+        "..oooccccdwwwwwwoooooooooooo....",
+        "....ddddddwwwwwwwwwwwwwwwo......",
+        ".....oooooooooooooooowwwo.......",
+        "....................ooooo.......",
+        "................................",
+        "................................"
+      ];
+
+      const frames = { sleep, sit, walka, walkb, tap };
+      const cat = document.querySelector(".neko");
+      const svg = cat.querySelector("svg");
+      const ns = "http://www.w3.org/2000/svg";
+      Object.entries(frames).forEach(([name, rows]) => {
+        const g = document.createElementNS(ns, "g");
+        g.dataset.frame = name;
+        g.style.display = "none";
+        rows.forEach((row, y) => {
+          for (let x = 0; x < row.length; x++) {
+            const fill = COLORS[row[x]];
+            if (!fill) continue;
+            const rect = document.createElementNS(ns, "rect");
+            rect.setAttribute("x", x);
+            rect.setAttribute("y", y);
+            rect.setAttribute("width", "1");
+            rect.setAttribute("height", "1");
+            rect.setAttribute("fill", fill);
+            g.appendChild(rect);
+          }
+        });
+        svg.appendChild(g);
+      });
+
+      function show(frame) {
+        cat.dataset.pose = frame;
+        svg.querySelectorAll("g").forEach((g) => {
+          g.style.display = g.dataset.frame === frame ? "" : "none";
+        });
+      }
+
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce) {
+        show("sleep");
+        return;
+      }
+
+      const folders = [...document.querySelectorAll("a.folder")];
+      const W = 64;
+      const H = 56;
+      let x = 12;
+      let y = Math.max(12, window.innerHeight - H - 16);
+      let facing = 1;
+      let pose = "sleep";
+      let until = performance.now() + 4200;
+      let goal = null;
+      let last = performance.now();
+      let step = 0;
+      let acc = 0;
+      let busy = false;
+      let runSince = 0;
+
+      function openGoal() {
+        if (busy || !goal || !goal.open) return;
+        busy = true;
+        goal.el.classList.remove("cat-press");
+        window.location.assign(goal.el.href);
+      }
+
+      function place() {
+        cat.style.transform = "translate(" + x + "px," + y + "px) scaleX(" + facing + ")";
+      }
+
+      function setPose(next) {
+        pose = next;
+        cat.classList.toggle("asleep", next === "sleep");
+        if (next === "walk" || next === "run") show(step ? "walkb" : "walka");
+        else show(next);
+      }
+
+      function spot(el, open) {
+        const r = el.getBoundingClientRect();
+        if (open) {
+          return {
+            x: r.left + r.width / 2 - W / 2,
+            y: r.top + r.height / 2 - H / 2
+          };
+        }
+        return {
+          x: r.left + r.width / 2 - W / 2,
+          y: r.top - H + 16
+        };
+      }
+
+      function aim(el, open) {
+        goal = { el, open };
+        if (open) runSince = performance.now();
+        setPose(open ? "run" : "walk");
+      }
+
+      folders.forEach((a) => {
+        a.addEventListener("click", (e) => {
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+          e.preventDefault();
+          if (busy) return;
+          document.querySelectorAll("a.folder.cat-press").forEach((el) => el.classList.remove("cat-press"));
+          aim(a, true);
+        });
+      });
+
+      function nextNap() {
+        let el = folders[Math.floor(Math.random() * folders.length)];
+        if (goal && el === goal.el && folders.length > 1) {
+          el = folders[(folders.indexOf(el) + 1) % folders.length];
+        }
+        aim(el, false);
+      }
+
+      show("sleep");
+      place();
+
+      function tick(now) {
+        const dt = Math.min(34, now - last);
+        last = now;
+
+        if ((pose === "walk" || pose === "run") && goal) {
+          const dest = spot(goal.el, goal.open);
+          const dx = dest.x - x;
+          const dy = dest.y - y;
+          const dist = Math.hypot(dx, dy);
+          const speed = (pose === "run" ? 460 : 130) * dt / 1000;
+          if (Math.abs(dx) > 4) facing = dx < 0 ? -1 : 1;
+          if (goal.open && now - runSince > 2200) {
+            x = dest.x;
+            y = dest.y;
+            place();
+            openGoal();
+            return;
+          }
+          if (dist <= Math.max(3, speed)) {
+            x = dest.x;
+            y = dest.y;
+            if (goal.open) {
+              setPose("tap");
+              goal.el.classList.add("cat-press");
+              until = now + 380;
+            } else {
+              setPose("sit");
+              until = now + 800;
+            }
+          } else {
+            x += dx / dist * speed;
+            y += dy / dist * speed;
+            acc += dt;
+            if (acc >= (pose === "run" ? 70 : 140)) {
+              acc = 0;
+              step ^= 1;
+              show(step ? "walkb" : "walka");
+            }
+          }
+          place();
+        } else if (now >= until) {
+          if (pose === "tap" && goal && goal.open) {
+            openGoal();
+            return;
+          }
+          if (pose === "sit") {
+            setPose("sleep");
+            until = now + 2800 + Math.random() * 2200;
+          } else if (pose === "sleep") {
+            nextNap();
+          }
+        }
+
+        if (!busy) requestAnimationFrame(tick);
+      }
+
+      window.addEventListener("resize", () => {
+        if (!goal && (pose === "sleep" || pose === "sit")) {
+          x = 12;
+          y = Math.max(12, window.innerHeight - H - 16);
+          place();
+        }
+      });
+
+      requestAnimationFrame(tick);
+    })();
+  </script>
+
+</body>
+</html>
